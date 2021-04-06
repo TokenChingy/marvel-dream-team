@@ -1,26 +1,34 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+import {createMuiTheme, CssBaseline, Theme, ThemeProvider} from '@material-ui/core';
+import Background from './Components/Background/Background';
+import Header from './Components/Header/Header';
+import Search from './Components/Search/Search';
+import Lineup from './Components/Lineup/Lineup';
+
+import {ContextProvider} from './Utilities/Store';
+
+const theme: Theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#ed1d24'
+    }
+  }
+});
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      <CssBaseline />
+      <ThemeProvider theme={theme}>
+        <Background>
+          <Header />
+          <ContextProvider>
+            <Search />
+            <Lineup />
+          </ContextProvider>
+        </Background>
+      </ThemeProvider>
+    </React.Fragment>
   );
 }
-
-export default App;
